@@ -4,6 +4,7 @@ export interface NavigationTab {
   to: string
   iconName?: string
   platform: string
+  brandColor: string
 }
 
 export interface Section {
@@ -19,6 +20,7 @@ export const navigationTabs: NavigationTab[] = [
     to: '/github',
     iconName: 'github',
     platform: 'github',
+    brandColor: '#24292e'
   },
   {
     name: 'linkedin',
@@ -26,6 +28,7 @@ export const navigationTabs: NavigationTab[] = [
     to: '/linkedin',
     iconName: 'linkedin',
     platform: 'linkedin',
+    brandColor: '#0A66C2'
   },
   {
     name: 'twitter',
@@ -33,6 +36,7 @@ export const navigationTabs: NavigationTab[] = [
     to: '/twitter',
     iconName: 'twitter',
     platform: 'twitter',
+    brandColor: '#1DA1F2'
   },
   {
     name: 'instagram',
@@ -40,7 +44,8 @@ export const navigationTabs: NavigationTab[] = [
     to: '/instagram',
     iconName: 'instagram',
     platform: 'instagram',
-  },
+    brandColor: '#E4405F'
+  }
 ]
 
 export const sections: Section[] = [

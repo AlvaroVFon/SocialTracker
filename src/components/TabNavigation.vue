@@ -1,24 +1,28 @@
 <template>
-  <nav class="border-b border-gray-200 bg-white shadow-sm">
+  <nav class="mt-10">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 justify-between">
-        <div class="flex">
-          <div class="flex space-x-8">
-            <router-link
-              v-for="tab in tabs"
-              :key="tab.name"
-              :to="tab.to"
-              class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium transition-colors duration-200"
-              :class="[
-                isActiveTab(tab.to)
-                  ? 'border-blue-500 text-gray-900'
-                  : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
-              ]"
-            >
-              <LucideIcon v-if="tab.iconName" :name="tab.iconName" :size="16" class="mr-2" />
-              {{ tab.label }}
-            </router-link>
-          </div>
+      <div class="flex h-16 justify-center items-center">
+        <div class="bg-gray-100 p-1 rounded-lg inline-flex">
+          <router-link
+            v-for="tab in tabs"
+            :key="tab.name"
+            :to="tab.to"
+            class="inline-flex items-center px-6 py-3 rounded-md text-base font-medium transition-all duration-200"
+            :class="[
+              isActiveTab(tab.to)
+                ? 'bg-white text-gray-900 shadow-sm'
+                : 'text-gray-600 hover:text-gray-900'
+            ]"
+          >
+            <LucideIcon
+              v-if="tab.iconName"
+              :name="tab.iconName"
+              :size="18"
+              :color="isActiveTab(tab.to) ? tab.brandColor : '#6b7280'"
+              class="mr-2"
+            />
+            {{ tab.label }}
+          </router-link>
         </div>
       </div>
     </div>

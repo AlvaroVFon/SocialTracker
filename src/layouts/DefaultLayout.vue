@@ -7,7 +7,7 @@ import { navigationTabs } from '@/config/navigation'
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Header -->
-    <DefaultHeader />
+    <DefaultHeader title="SocialTracker" />
 
     <!-- Tab Navigation -->
     <TabNavigation :tabs="navigationTabs" />
