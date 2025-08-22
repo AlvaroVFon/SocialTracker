@@ -1,0 +1,17 @@
+<template>
+  <SocialPlatformLayout :platform="linkedinPlatform" />
+</template>
+
+<script setup lang="ts">
+import SocialPlatformLayout from '@/components/SocialPlatformLayout.vue'
+
+const linkedinPlatform = {
+  name: 'linkedin',
+  label: 'LinkedIn',
+  iconName: 'linkedin',
+}
+</script>
+
+<style scoped>
+/* Estilos específicos de LinkedIn */
+</style>
