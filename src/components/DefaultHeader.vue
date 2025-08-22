@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import LucideIcon from '@/components/icons/LucideIcon.vue'
-import SocialTrackerIcon from './icons/SocialTrackerIcon.vue';
+import SocialTrackerIcon from './icons/SocialTrackerIcon.vue'
 
 interface Props {
   title?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  title: 'Monitor de redes sociales'
+withDefaults(defineProps<Props>(), {
+  title: 'Monitor de redes sociales',
 })
 </script>
 <template>

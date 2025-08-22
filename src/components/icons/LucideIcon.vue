@@ -46,7 +46,7 @@ const iconName = computed(() => {
 const iconComponent = computed((): Component | null => {
   if (!iconName.value) return null
 
-  const component = (LucideIcons as any)[iconName.value]
+  const component = (LucideIcons as unknown as Record<string, Component>)[iconName.value]
 
   if (!component) {
     console.warn(

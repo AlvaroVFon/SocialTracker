@@ -17,7 +17,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  color: 'blue'
+  color: 'blue',
 })
 
 const valueColorClass = computed(() => {
@@ -26,7 +26,7 @@ const valueColorClass = computed(() => {
     green: 'text-green-600',
     purple: 'text-purple-600',
     red: 'text-red-600',
-    yellow: 'text-yellow-600'
+    yellow: 'text-yellow-600',
   }
   return colorMap[props.color]
 })

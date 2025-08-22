@@ -9,6 +9,7 @@ const githubPlatform = {
   name: 'github',
   label: 'GitHub',
   iconName: 'github',
+  iconColor: '#181717',
 }
 </script>
 

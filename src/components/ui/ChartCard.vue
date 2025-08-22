@@ -14,6 +14,6 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  placeholder: 'Gráfico'
+  placeholder: 'Gráfico',
 })
 </script>

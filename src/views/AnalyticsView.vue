@@ -9,6 +9,7 @@ const linkedinPlatform = {
   name: 'linkedin',
   label: 'LinkedIn',
   iconName: 'linkedin',
+  iconColor: '#0A66C2',
 }
 </script>
 

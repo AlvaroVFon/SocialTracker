@@ -3,9 +3,7 @@
     <h2 class="text-2xl font-bold text-gray-900 mb-6">Configuración</h2>
     <div class="space-y-6">
       <div>
-        <h3 class="text-lg font-medium text-gray-900 mb-4">
-          Configuración de {{ platformLabel }}
-        </h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Configuración de {{ platformLabel }}</h3>
         <div class="space-y-4">
           <ToggleCard
             title="Notificaciones de menciones"

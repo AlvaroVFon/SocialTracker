@@ -10,7 +10,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   size: 24,
   color: '#00adb5',
-  class: ''
+  class: '',
 })
 
 const sizeValue = computed(() => {

@@ -27,7 +27,7 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  defaultEnabled: false
+  defaultEnabled: false,
 })
 
 const isEnabled = ref(props.defaultEnabled)

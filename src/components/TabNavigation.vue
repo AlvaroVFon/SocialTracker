@@ -11,7 +11,7 @@
             :class="[
               isActiveTab(tab.to)
                 ? 'bg-white text-gray-900 shadow-sm'
-                : 'text-gray-600 hover:text-gray-900'
+                : 'text-gray-600 hover:text-gray-900',
             ]"
           >
             <LucideIcon
@@ -30,7 +30,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import type { NavigationTab } from '@/config/navigation'
@@ -39,7 +38,7 @@ interface Props {
   tabs: NavigationTab[]
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 const route = useRoute()
 
 const isActiveTab = (path: string): boolean => {

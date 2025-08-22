@@ -9,6 +9,7 @@ const twitterPlatform = {
   name: 'twitter',
   label: 'Twitter',
   iconName: 'twitter',
+  iconColor: '#1DA1F2',
 }
 </script>
 

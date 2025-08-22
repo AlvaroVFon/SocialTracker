@@ -4,14 +4,9 @@
       <div>
         <p class="text-sm font-medium text-gray-900">{{ activity.user }}</p>
         <p class="mt-1 text-sm text-gray-600">{{ activity.content }}</p>
-        <p class="mt-1 text-xs text-gray-500">
-          {{ activity.type }} • {{ activity.time }}
-        </p>
+        <p class="mt-1 text-xs text-gray-500">{{ activity.type }} • {{ activity.time }}</p>
       </div>
-      <span
-        class="px-2 py-1 text-xs font-medium rounded-full"
-        :class="sentimentClass"
-      >
+      <span class="px-2 py-1 text-xs font-medium rounded-full" :class="sentimentClass">
         {{ activity.sentiment }}
       </span>
     </div>

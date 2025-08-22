@@ -5,7 +5,12 @@
       <div class="mb-8 rounded-lg bg-white p-6 shadow">
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <LucideIcon :name="platform.iconName" :size="32" class="mr-4 text-gray-900" />
+            <LucideIcon
+              :name="platform.iconName"
+              :size="32"
+              :color="platform.iconColor"
+              class="mr-4 text-gray-900"
+            />
             <div>
               <h1 class="text-3xl font-bold text-gray-900">{{ platform.label }} Analytics</h1>
               <p class="text-gray-600">Monitoreo y análisis completo de {{ platform.label }}</p>
@@ -49,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import DashboardSection from '@/components/sections/DashboardSection.vue'
 import AnalyticsSection from '@/components/sections/AnalyticsSection.vue'
@@ -62,13 +67,14 @@ interface Platform {
   name: string
   label: string
   iconName: string
+  iconColor: string
 }
 
 interface Props {
   platform: Platform
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const activeSection = ref('dashboard')
 

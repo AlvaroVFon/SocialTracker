@@ -9,9 +9,6 @@ const instagramPlatform = {
   name: 'instagram',
   label: 'Instagram',
   iconName: 'instagram',
+  iconColor: '#C13584',
 }
 </script>
-
-<style scoped>
-/* Estilos específicos de Instagram */
-</style>

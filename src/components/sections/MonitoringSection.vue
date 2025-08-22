@@ -4,11 +4,7 @@
     <div class="space-y-4">
       <h3 class="text-lg font-medium text-gray-900">Actividad Reciente</h3>
       <div class="space-y-4">
-        <ActivityCard
-          v-for="(activity, index) in activities"
-          :key="index"
-          :activity="activity"
-        />
+        <ActivityCard v-for="(activity, index) in activities" :key="index" :activity="activity" />
       </div>
     </div>
   </div>

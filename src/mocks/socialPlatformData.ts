@@ -26,7 +26,7 @@ export const mockStats: MockStats = {
   followers: '12.5K',
   followersGrowth: '8.2',
   engagement: '4.7',
-  posts: '23'
+  posts: '23',
 }
 
 /**
@@ -38,20 +38,20 @@ export const mockRecentActivity: MockActivity[] = [
     content: 'Excelente proyecto! ⭐',
     type: 'Star',
     time: 'Hace 2h',
-    sentiment: 'positive'
+    sentiment: 'positive',
   },
   {
     user: '@tech_reviewer',
     content: 'Podrían mejorar la documentación',
     type: 'Issue',
     time: 'Hace 4h',
-    sentiment: 'neutral'
+    sentiment: 'neutral',
   },
   {
     user: '@code_master',
     content: 'Increíble trabajo en el último commit!',
     type: 'Comment',
     time: 'Hace 6h',
-    sentiment: 'positive'
-  }
+    sentiment: 'positive',
+  },
 ]

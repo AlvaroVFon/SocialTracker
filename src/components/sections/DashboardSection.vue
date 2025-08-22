@@ -14,12 +14,7 @@
         subtitle="Promedio mensual"
         color="green"
       />
-      <StatCard
-        title="Publicaciones"
-        :value="stats.posts"
-        subtitle="Este mes"
-        color="purple"
-      />
+      <StatCard title="Publicaciones" :value="stats.posts" subtitle="Este mes" color="purple" />
     </div>
   </div>
 </template>
