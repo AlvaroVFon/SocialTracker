@@ -76,14 +76,13 @@ import SettingsSection from '@/components/sections/SettingsSection.vue'
 import SocialAccountCard from '@/components/ui/accountcard/SocialAccountCard.vue'
 import type { AccountCardProps } from '@/components/ui/accountcard/AccountCardProps'
 import { sections as navigationSections } from '@/config/navigation'
-
 import { mockStats, mockRecentActivity } from '@/mocks/socialPlatformData'
 import {
-  githubAccount,
   linkedinAccount,
   twitterAccount,
   instagramAccount,
 } from '@/mocks/accountCardMocks'
+import { useGithubAccount } from '@/composables/useGithubAccount'
 
 interface Platform {
   name: string
@@ -99,10 +98,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const { account: githubAccount, fetchAccount, loading, error } = useGithubAccount()
+
 const account = computed(() => {
   switch (props.platform.name) {
     case 'github':
-      return githubAccount
+      return githubAccount.value
     case 'linkedin':
       return linkedinAccount
     case 'twitter':
@@ -113,6 +114,10 @@ const account = computed(() => {
       return undefined
   }
 })
+
+if (props.platform.name === 'github') {
+  fetchAccount()
+}
 
 const activeSection = ref('dashboard')
 

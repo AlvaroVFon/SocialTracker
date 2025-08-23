@@ -3,7 +3,7 @@
     class="bg-white rounded-xl shadow p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-6 items-center sm:items-start"
   >
     <img
-      :src="avatarUrl"
+      :src="avatar_url"
       :alt="username + ' avatar'"
       class="hidden sm:block w-24 h-24 rounded-full border-2 border-gray-200 object-cover mb-0 sm:mb-0 mx-0"
     />
@@ -47,7 +47,7 @@
         </AccountInfoItem>
       </div>
       <div class="text-xs text-gray-400 text-center sm:text-left" v-if="created_at">
-        Miembro desde {{ created_at }}
+        Miembro desde {{ formatDate(created_at) }}
       </div>
       <slot />
     </div>
@@ -55,13 +55,15 @@
 </template>
 
 <script setup lang="ts">
-import LucideIcon from '@/components/icons/LucideIcon.vue'
+
 import AccountInfoItem from '@/components/ui/accountcard/AccountInfoItem.vue'
+import { formatDate } from '@/utils/formatDate'
+
 
 interface Props {
   username: string
   name?: string
-  avatarUrl: string
+  avatar_url: string
   iconName?: string
   iconColor?: string
   bio?: string
