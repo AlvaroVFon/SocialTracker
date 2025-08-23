@@ -1,45 +1,24 @@
-# rrss-monitor
+# SocialTracker
 
-This template should help get you started developing with Vue 3 in Vite.
+<p align="left">
+  <img src="https://img.shields.io/badge/Vue-3.x-42b883?logo=vue.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/Vite-^5.0-646cff?logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/Supabase-DB-3ecf8e?logo=supabase&logoColor=white" />
+  <img src="https://img.shields.io/badge/TailwindCSS-^3.0-38bdf8?logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/TypeScript-4.x-3178c6?logo=typescript&logoColor=white" />
+</p>
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+SocialTracker es una aplicación web para monitorear, analizar y visualizar métricas de cuentas sociales como GitHub, Twitter, Instagram y LinkedIn. Ofrece dashboards, analíticas y seguimiento de actividad en tiempo real, todo en una interfaz moderna y responsiva.
 
-## Type Support for `.vue` Imports in TS
+<p align="center">
+  <video src="./docs/demo.mp4" width="700" autoplay loop muted playsinline></video>
+</p>
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Características
+- Visualización de métricas y estadísticas de cuentas sociales
+- Dashboard con resumen de actividad y analíticas
+- Soporte para múltiples plataformas: GitHub, Twitter, Instagram, LinkedIn
+- Integración con Supabase para almacenamiento y autenticación
+- UI moderna construida con Vue 3, Vite y TailwindCSS
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-yarn
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-yarn dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-yarn build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-yarn test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-yarn lint
-```
