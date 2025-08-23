@@ -1,9 +1,9 @@
 <template>
-  <div class="rounded-lg bg-white p-6 shadow">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Monitoring</h2>
-    <div class="space-y-4">
-      <h3 class="text-lg font-medium text-gray-900">Actividad Reciente</h3>
-      <div class="space-y-4">
+  <div class="rounded-lg bg-white p-3 sm:p-6 shadow">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Monitoring</h2>
+    <div class="space-y-3 sm:space-y-4">
+      <h3 class="text-base sm:text-lg font-medium text-gray-900">Actividad Reciente</h3>
+      <div class="space-y-3 sm:space-y-4">
         <ActivityCard v-for="(activity, index) in activities" :key="index" :activity="activity" />
       </div>
     </div>

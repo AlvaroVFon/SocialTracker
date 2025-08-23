@@ -12,4 +12,3 @@ const githubPlatform = {
   iconColor: '#181717',
 }
 </script>
-

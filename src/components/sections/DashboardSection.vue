@@ -1,7 +1,7 @@
 <template>
-  <div class="rounded-lg bg-white p-6 shadow">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Dashboard</h2>
-    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="rounded-lg bg-white p-3 sm:p-6 shadow">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Dashboard</h2>
+    <div class="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <StatCard
         title="Seguidores"
         :value="stats.followers"

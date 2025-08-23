@@ -1,7 +1,7 @@
 <template>
-  <div class="rounded-lg bg-white p-6 shadow">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Analytics</h2>
-    <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+  <div class="rounded-lg bg-white p-3 sm:p-6 shadow">
+    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Analytics</h2>
+    <div class="grid grid-cols-1 gap-4 sm:gap-6 lg:grid-cols-2">
       <ChartCard title="Engagement por Día" placeholder="Gráfico de engagement diario" />
       <ChartCard title="Crecimiento de Seguidores" placeholder="Gráfico de crecimiento" />
     </div>

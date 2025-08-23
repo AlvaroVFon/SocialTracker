@@ -44,7 +44,8 @@ export const twitterAccount: AccountCardProps = {
 export const instagramAccount: AccountCardProps = {
   username: 'natgeo',
   name: 'National Geographic',
-  avatarUrl: 'https://instagram.fmad3-4.fna.fbcdn.net/v/t51.2885-19/11820650_1625907977662747_180064660_a.jpg',
+  avatarUrl:
+    'https://instagram.fmad3-4.fna.fbcdn.net/v/t51.2885-19/11820650_1625907977662747_180064660_a.jpg',
   iconName: 'Instagram',
   iconColor: '#C13584',
   bio: 'Experience the world through the eyes of National Geographic photographers.',

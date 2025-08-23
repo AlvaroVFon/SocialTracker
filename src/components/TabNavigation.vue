@@ -1,13 +1,13 @@
 <template>
-  <nav class="mt-10">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 justify-center items-center">
-        <div class="bg-gray-100 p-1 rounded-lg inline-flex">
+  <nav class="mt-6 sm:mt-10">
+    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div class="flex h-14 sm:h-16 justify-center items-center">
+        <div class="bg-gray-100 p-1 rounded-lg flex flex-wrap gap-1 sm:gap-2">
           <router-link
             v-for="tab in tabs"
             :key="tab.name"
             :to="tab.to"
-            class="inline-flex items-center px-6 py-3 rounded-md text-base font-medium transition-all duration-200"
+            class="flex items-center px-2 sm:px-5 py-1.5 sm:py-2.5 rounded-md text-xs sm:text-base font-medium transition-all duration-200"
             :class="[
               isActiveTab(tab.to)
                 ? 'bg-white text-gray-900 shadow-sm'
@@ -17,9 +17,9 @@
             <LucideIcon
               v-if="tab.iconName"
               :name="tab.iconName"
-              :size="18"
+              :size="15"
               :color="isActiveTab(tab.to) ? tab.brandColor : '#6b7280'"
-              class="mr-2"
+              :class="'mr-1 sm:mr-2 sm:w-5 sm:h-5'"
             />
             {{ tab.label }}
           </router-link>
