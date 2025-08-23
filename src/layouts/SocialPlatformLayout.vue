@@ -1,6 +1,11 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-8">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <SocialAccountCard
+        v-if="account"
+        v-bind="account"
+        class="mb-8"
+      />
       <!-- Header de la plataforma -->
       <div class="mb-8 rounded-lg bg-white p-6 shadow">
         <div class="flex items-center justify-between">
@@ -35,6 +40,8 @@
         </div>
       </div>
 
+      <!-- Social Account Card -->
+
       <!-- Contenido de las secciones -->
       <div class="space-y-6">
         <!-- Dashboard Section -->
@@ -54,14 +61,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import DashboardSection from '@/components/sections/DashboardSection.vue'
 import AnalyticsSection from '@/components/sections/AnalyticsSection.vue'
 import MonitoringSection from '@/components/sections/MonitoringSection.vue'
 import SettingsSection from '@/components/sections/SettingsSection.vue'
+import SocialAccountCard from '@/components/ui/accountcard/SocialAccountCard.vue'
+import type { AccountCardProps } from '@/components/ui/accountcard/AccountCardProps'
 import { sections as navigationSections } from '@/config/navigation'
+
 import { mockStats, mockRecentActivity } from '@/mocks/socialPlatformData'
+import { githubAccount, linkedinAccount, twitterAccount, instagramAccount } from '@/mocks/accountCardMocks'
 
 interface Platform {
   name: string
@@ -72,13 +83,29 @@ interface Platform {
 
 interface Props {
   platform: Platform
+  account?: AccountCardProps
 }
 
-defineProps<Props>()
+
+const props = defineProps<Props>()
+
+const account = computed(() => {
+  switch (props.platform.name) {
+    case 'github':
+      return githubAccount
+    case 'linkedin':
+      return linkedinAccount
+    case 'twitter':
+      return twitterAccount
+    case 'instagram':
+      return instagramAccount
+    default:
+      return undefined
+  }
+})
 
 const activeSection = ref('dashboard')
 
-// Datos de ejemplo que se podrían cargar dinámicamente
 const stats = ref(mockStats)
 const recentActivity = ref(mockRecentActivity)
 </script>

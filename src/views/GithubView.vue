@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import SocialPlatformLayout from '@/components/SocialPlatformLayout.vue'
+import SocialPlatformLayout from '@/layouts/SocialPlatformLayout.vue'
 
 const githubPlatform = {
   name: 'github',
@@ -13,6 +13,3 @@ const githubPlatform = {
 }
 </script>
 
-<style scoped>
-/* Estilos específicos de GitHub */
-</style>

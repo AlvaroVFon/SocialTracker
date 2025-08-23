@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '@/views/DashboardView.vue'
-import AnalyticsView from '@/views/AnalyticsView.vue'
-import MonitoringView from '@/views/MonitoringView.vue'
-import SettingsView from '@/views/SettingsView.vue'
+import GithubView from '@/views/GithubView.vue'
+import LinkedinView from '@/views/LinkedinView.vue'
+import TwitterView from '@/views/TwitterView.vue'
+import InstagramView from '@/views/InstagramView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,22 +14,22 @@ const router = createRouter({
     {
       path: '/github',
       name: 'GitHub',
-      component: DashboardView,
+      component: GithubView,
     },
     {
       path: '/linkedin',
       name: 'LinkedIn',
-      component: AnalyticsView,
+      component: LinkedinView,
     },
     {
       path: '/twitter',
       name: 'Twitter',
-      component: MonitoringView,
+      component: TwitterView,
     },
     {
       path: '/instagram',
       name: 'Instagram',
-      component: SettingsView,
+      component: InstagramView,
     },
   ],
 })
