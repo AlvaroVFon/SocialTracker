@@ -1,7 +1,7 @@
 export interface AccountCardProps {
   username: string
   name?: string
-  avatarUrl: string
+  avatar_url: string
   iconName?: string
   iconColor?: string
   bio?: string

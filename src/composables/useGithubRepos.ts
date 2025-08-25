@@ -1,34 +1,33 @@
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
+import type { Repo } from '@/types/repo'
 
-export function useGithubAccount() {
-  const account = ref(null)
+export function useGithubRepos() {
+  const repos = ref<Repo[]>()
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  const fetchAccount = async () => {
+  const fetchRepos = async () => {
     loading.value = true
     error.value = null
     const { data, error: fetchError } = await supabase
-      .from('github_account')
+      .from('repo_stats')
       .select('*')
-      .eq('username', import.meta.env.VITE_GITHUB_USERNAME)
-      .single()
-
+      .order('total_views', { ascending: false })
     if (fetchError) {
       error.value = fetchError.message
-      account.value = null
+      repos.value = []
     } else {
-      account.value = data
+      repos.value = (data as Repo[]) || []
     }
     loading.value = false
-    return account.value
+    return repos.value
   }
 
   return {
-    account,
+    repos,
     loading,
     error,
-    fetchAccount,
+    fetchRepos,
   }
 }

@@ -55,10 +55,8 @@
 </template>
 
 <script setup lang="ts">
-
 import AccountInfoItem from '@/components/ui/accountcard/AccountInfoItem.vue'
 import { formatDate } from '@/utils/formatDate'
-
 
 interface Props {
   username: string

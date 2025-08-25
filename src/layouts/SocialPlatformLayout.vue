@@ -52,6 +52,10 @@
       <div class="space-y-6">
         <!-- Dashboard Section -->
         <DashboardSection v-if="activeSection === 'dashboard'" :stats="stats" />
+        <RepoListSection
+          v-if="activeSection === 'dashboard' && platform.name === 'github'"
+          :repos="githubRepos as Repo[]"
+        />
 
         <!-- Analytics Section -->
         <AnalyticsSection v-if="activeSection === 'analytics'" />
@@ -67,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import DashboardSection from '@/components/sections/DashboardSection.vue'
 import AnalyticsSection from '@/components/sections/AnalyticsSection.vue'
@@ -77,12 +81,11 @@ import SocialAccountCard from '@/components/ui/accountcard/SocialAccountCard.vue
 import type { AccountCardProps } from '@/components/ui/accountcard/AccountCardProps'
 import { sections as navigationSections } from '@/config/navigation'
 import { mockStats, mockRecentActivity } from '@/mocks/socialPlatformData'
-import {
-  linkedinAccount,
-  twitterAccount,
-  instagramAccount,
-} from '@/mocks/accountCardMocks'
+import { linkedinAccount, twitterAccount, instagramAccount } from '@/mocks/accountCardMocks'
 import { useGithubAccount } from '@/composables/useGithubAccount'
+import RepoListSection from '@/components/sections/RepoListSection.vue'
+import { useGithubRepos } from '@/composables/useGithubRepos'
+import type { Repo } from '@/types/repo'
 
 interface Platform {
   name: string
@@ -98,7 +101,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { account: githubAccount, fetchAccount, loading, error } = useGithubAccount()
+const { account: githubAccount, fetchAccount } = useGithubAccount()
+const { repos: githubRepos, fetchRepos } = useGithubRepos()
 
 const account = computed(() => {
   switch (props.platform.name) {
@@ -115,12 +119,15 @@ const account = computed(() => {
   }
 })
 
-if (props.platform.name === 'github') {
-  fetchAccount()
-}
-
 const activeSection = ref('dashboard')
 
 const stats = ref(mockStats)
 const recentActivity = ref(mockRecentActivity)
+
+onMounted(() => {
+  if (props.platform.name === 'github') {
+    fetchAccount()
+    fetchRepos()
+  }
+})
 </script>
