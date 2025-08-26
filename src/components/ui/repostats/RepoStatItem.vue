@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 rounded p-2 flex flex-col items-center">
+  <div class="bg-white border border-gray-200 rounded shadow p-4 flex flex-col items-center">
     <span :class="['font-bold text-lg', colorClass]">{{ value }}</span>
     <span class="text-xs text-gray-500">{{ label }}</span>
   </div>
@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  value: number
+  value: number | string
   label: string
   color?: 'blue' | 'purple' | 'green' | 'gray'
 }>()

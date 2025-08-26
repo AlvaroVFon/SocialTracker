@@ -18,6 +18,7 @@ interface Props {
   name: string
   size?: number | string
   color?: string
+  strokeWidth?: number | string
   absoluteStrokeWidth?: boolean
   class?: string | string[] | Record<string, boolean>
 }

@@ -17,6 +17,12 @@ const router = createRouter({
       component: GithubView,
     },
     {
+      path: '/repos/:id/stats',
+      name: 'RepoStats',
+      component: () => import('@/views/RepoStatsView.vue'),
+      props: true,
+    },
+    {
       path: '/linkedin',
       name: 'LinkedIn',
       component: LinkedinView,
@@ -30,6 +36,11 @@ const router = createRouter({
       path: '/instagram',
       name: 'Instagram',
       component: InstagramView,
+    },
+    {
+      path: '/demo',
+      name: 'Demo',
+      component: () => import('@/views/DemoView.vue'),
     },
   ],
 })

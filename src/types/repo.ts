@@ -14,3 +14,12 @@ export interface Repo {
   total_views?: number
   total_clones?: number
 }
+
+export interface RepoMetrics {
+  id: string
+  repo_id: string
+  type: 'view' | 'clone'
+  timestamp: string
+  count: number
+  uniques: number
+}
