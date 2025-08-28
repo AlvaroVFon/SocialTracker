@@ -17,7 +17,10 @@
           </p>
         </div>
       </div>
-      <div class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0">
+      <div
+        class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0"
+        v-if="platform.name !== 'github'"
+      >
         <button
           v-for="section in navigationSections"
           :key="section.id"

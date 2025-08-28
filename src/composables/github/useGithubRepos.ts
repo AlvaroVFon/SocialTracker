@@ -1,9 +1,11 @@
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
-import type { Repo, RepoMetrics } from '@/types/repo'
+import type { Repo, RepoMetrics, RepoTotals } from '@/types/repo'
+import { getViewsData, getClonesData } from '@/composables/github/githubHelper'
 
 export function useGithubRepos() {
   const repos = ref<Repo[]>()
+  const totals = ref<RepoTotals>()
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -57,20 +59,6 @@ export function useGithubRepos() {
     return data as RepoMetrics[] | null
   }
 
-  function getViewsData(metrics: RepoMetrics[] | null) {
-    if (!metrics) return []
-    return metrics
-      .filter((m) => m.type === 'view')
-      .map((m) => ({ date: m.timestamp, views: m.count, uniques: m.uniques }))
-  }
-
-  function getClonesData(metrics: RepoMetrics[] | null) {
-    if (!metrics) return []
-    return metrics
-      .filter((m) => m.type === 'clone')
-      .map((m) => ({ date: m.timestamp, clones: m.count, uniques: m.uniques }))
-  }
-
   function getRepoMetrics(metrics: RepoMetrics[]) {
     return {
       views: getViewsData(metrics),
@@ -78,13 +66,32 @@ export function useGithubRepos() {
     }
   }
 
+  async function fetchTotals() {
+    loading.value = true
+    error.value = null
+    const { data, error: fetchError } = await supabase
+      .from('repo_metrics_totals')
+      .select('*')
+      .single()
+    loading.value = false
+    if (fetchError) {
+      error.value = fetchError.message
+      return null
+    }
+
+    totals.value = data as RepoTotals
+    return data as RepoTotals | null
+  }
+
   return {
     repos,
+    totals,
     loading,
     error,
     fetchRepos,
     fetchRepoStats,
     fetchRepoMetrics,
+    fetchTotals,
     getRepoMetrics,
   }
 }

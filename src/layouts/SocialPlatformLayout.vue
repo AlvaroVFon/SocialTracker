@@ -11,7 +11,7 @@
 
       <div class="space-y-6">
         <!-- Dashboard Section -->
-        <DashboardSection v-if="activeSection === 'dashboard'" :stats="stats" />
+        <DashboardSection v-if="activeSection === 'dashboard'" :cards="dashboardCards" />
         <RepoListSection
           v-if="activeSection === 'dashboard' && platform.name === 'github'"
           :repos="githubRepos as Repo[]"
@@ -42,9 +42,9 @@ import type { AccountCardProps } from '@/components/ui/accountcard/AccountCardPr
 import type { Platform } from '@/types/platform'
 import { mockStats, mockRecentActivity } from '@/mocks/socialPlatformData'
 import { linkedinAccount, twitterAccount, instagramAccount } from '@/mocks/accountCardMocks'
-import { useGithubAccount } from '@/composables/useGithubAccount'
+import { useGithubAccount } from '@/composables/github/useGithubAccount'
 import RepoListSection from '@/components/sections/RepoListSection.vue'
-import { useGithubRepos } from '@/composables/useGithubRepos'
+import { useGithubRepos } from '@/composables/github/useGithubRepos'
 import type { Repo } from '@/types/repo'
 
 interface Props {
@@ -55,7 +55,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { account: githubAccount, fetchAccount } = useGithubAccount()
-const { repos: githubRepos, fetchRepos } = useGithubRepos()
+const { repos: githubRepos, fetchRepos, totals, fetchTotals } = useGithubRepos()
 
 const account = computed(() => {
   switch (props.platform.name) {
@@ -74,13 +74,29 @@ const account = computed(() => {
 
 const activeSection = ref('dashboard')
 
-const stats = ref(mockStats)
+import { getGithubDashboardCards } from '@/config/dashboardCards/github'
+
+const dashboardCards = computed(() => {
+  switch (props.platform.name) {
+    case 'github':
+      return getGithubDashboardCards(totals.value ?? {})
+    // case 'linkedin':
+    //   return getLinkedinDashboardCards(...)
+    // case 'twitter':
+    //   return getTwitterDashboardCards(...)
+    // case 'instagram':
+    //   return getInstagramDashboardCards(...)
+    default:
+      return []
+  }
+})
 const recentActivity = ref(mockRecentActivity)
 
 onMounted(() => {
   if (props.platform.name === 'github') {
     fetchAccount()
     fetchRepos()
+    fetchTotals()
   }
 })
 </script>

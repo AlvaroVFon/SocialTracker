@@ -159,7 +159,7 @@ import BarChart from '@/components/ui/charts/BarChart.vue'
 import LineChart from '@/components/ui/charts/LineChart.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { useGithubRepos } from '@/composables/useGithubRepos'
+import { useGithubRepos } from '@/composables/github/useGithubRepos'
 import type { Repo, RepoMetrics } from '@/types/repo'
 
 const route = useRoute()

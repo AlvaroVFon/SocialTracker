@@ -23,3 +23,10 @@ export interface RepoMetrics {
   count: number
   uniques: number
 }
+
+export interface RepoTotals {
+  total_views: number | string
+  total_unique_views: number | string
+  total_clones: number | string
+  total_unique_clones: number | string
+}
