@@ -15,6 +15,10 @@
         <RepoListSection
           v-if="activeSection === 'dashboard' && platform.name === 'github'"
           :repos="githubRepos as Repo[]"
+          :page="repoPage"
+          :page-size="pageSize"
+          :total="totalRepos"
+          @update:page="repoPage = $event"
         />
 
         <!-- Analytics Section -->
@@ -31,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import SocialPlatformHeader from '@/components/layouts/SocialPlatformHeader.vue'
 import DashboardSection from '@/components/sections/DashboardSection.vue'
 import AnalyticsSection from '@/components/sections/AnalyticsSection.vue'
@@ -55,7 +59,7 @@ interface Props {
 const props = defineProps<Props>()
 
 const { account: githubAccount, fetchAccount } = useGithubAccount()
-const { repos: githubRepos, fetchRepos, totals, fetchTotals } = useGithubRepos()
+const { repos: githubRepos, fetchRepos, totals, fetchTotals, fetchReposCount } = useGithubRepos()
 
 const account = computed(() => {
   switch (props.platform.name) {
@@ -92,10 +96,24 @@ const dashboardCards = computed(() => {
 })
 const recentActivity = ref(mockRecentActivity)
 
-onMounted(() => {
+const repoPage = ref(1)
+const pageSize = 6
+const totalRepos = ref(0)
+
+async function loadRepos() {
+  if (props.platform.name === 'github') {
+    const offset = (repoPage.value - 1) * pageSize
+    await fetchRepos(pageSize, offset)
+  }
+}
+
+watch([repoPage, () => props.platform.name], loadRepos, { immediate: true })
+
+onMounted(async () => {
   if (props.platform.name === 'github') {
     fetchAccount()
-    fetchRepos()
+    await loadRepos()
+    totalRepos.value = await fetchReposCount()
     fetchTotals()
   }
 })

@@ -9,13 +9,14 @@ export function useGithubRepos() {
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  const fetchRepos = async () => {
+  const fetchRepos = async (limit = 10, offset = 0) => {
     loading.value = true
     error.value = null
     const { data, error: fetchError } = await supabase
       .from('repo_stats')
       .select('*')
       .order('total_views', { ascending: false })
+      .range(offset, offset + limit - 1)
     if (fetchError) {
       error.value = fetchError.message
       repos.value = []
@@ -24,6 +25,17 @@ export function useGithubRepos() {
     }
     loading.value = false
     return repos.value
+  }
+
+  const fetchReposCount = async () => {
+    const { count, error: fetchError } = await supabase
+      .from('repo_stats')
+      .select('*', { count: 'exact', head: true })
+    if (fetchError) {
+      error.value = fetchError.message
+      return 0
+    }
+    return count || 0
   }
 
   const fetchRepoStats = async (repoId: string) => {
@@ -92,6 +104,7 @@ export function useGithubRepos() {
     fetchRepoStats,
     fetchRepoMetrics,
     fetchTotals,
+    fetchReposCount,
     getRepoMetrics,
   }
 }
