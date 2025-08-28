@@ -17,14 +17,11 @@
           </p>
         </div>
       </div>
-      <div
-        class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0"
-        v-if="platform.name !== 'github'"
-      >
+      <nav v-if="sections && sections.length" class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0 w-full sm:w-auto">
         <button
-          v-for="section in navigationSections"
+          v-for="section in sections"
           :key="section.id"
-          @click="$emit('update:activeSection', section.id)"
+          @click="scrollToSection(section.id)"
           class="px-2 sm:px-3 py-1 sm:py-2 text-[11px] sm:text-sm font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 min-w-0 flex items-center"
           :class="[
             activeSection === section.id
@@ -41,23 +38,35 @@
           />
           <span class="truncate">{{ section.label }}</span>
         </button>
-      </div>
+      </nav>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import LucideIcon from '@/components/icons/LucideIcon.vue'
-import { sections as navigationSections } from '@/config/navigation'
+import type { Section } from '@/config/navigation'
 import type { Platform } from '@/types/platform'
 import { defineProps, defineEmits } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   platform: Platform
-  activeSection: string
+  activeSection?: string
+  sections?: Section[]
 }>()
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'update:activeSection', sectionId: string): void
 }>()
+
+function scrollToSection(sectionId: string) {
+  emit('update:activeSection', sectionId)
+  // Esperar a que el DOM actualice la sección visible
+  setTimeout(() => {
+    const el = document.getElementById(sectionId)
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, 50)
+}
 </script>

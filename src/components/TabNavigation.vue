@@ -1,5 +1,5 @@
 <template>
-  <nav class="mt-6 sm:mt-10">
+  <nav class="mt-6 sm:mt-10 sticky top-0 z-40 bg-gray-50">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       <div class="flex h-14 sm:h-16 justify-center items-center">
         <div class="bg-gray-100 p-1 rounded-lg flex flex-wrap gap-1 sm:gap-2">
