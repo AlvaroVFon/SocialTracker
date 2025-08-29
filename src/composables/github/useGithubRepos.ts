@@ -1,11 +1,12 @@
 import { ref } from 'vue'
 import { supabase } from '@/lib/supabaseClient'
-import type { Repo, RepoMetrics, RepoTotals } from '@/types/repo'
+import type { Commit, Repo, RepoMetrics, RepoTotals } from '@/types/repo'
 import { getViewsData, getClonesData } from '@/composables/github/githubHelper'
 
 export function useGithubRepos() {
   const repos = ref<Repo[]>()
   const totals = ref<RepoTotals>()
+  const commits = ref<Commit[]>()
   const loading = ref(false)
   const error = ref<string | null>(null)
 
@@ -95,9 +96,31 @@ export function useGithubRepos() {
     return data as RepoTotals | null
   }
 
+  async function fetchCommits(prNumber: number) {
+    loading.value = true
+    error.value = null
+    const { data, error: fetchError } = await supabase
+      .from('pr_commits')
+      .select('*')
+      .eq('pr_number', prNumber)
+      .order('date', { ascending: true })
+    loading.value = false
+    if (fetchError) {
+      error.value = fetchError.message
+      return null
+    }
+
+    console.log(data)
+
+    commits.value = data as Commit[] | null
+
+    return data as Commit[] | null
+  }
+
   return {
     repos,
     totals,
+    fetchCommits,
     loading,
     error,
     fetchRepos,

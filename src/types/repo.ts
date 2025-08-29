@@ -45,3 +45,18 @@ export interface PullRequest {
   url: string
   commits_url?: string
 }
+
+export interface Commit {
+  id: string
+  pr_number: number
+  repo_name: string
+  sha: string
+  author_name: string
+  author_email: string
+  message: string
+  date: Date | string
+  url: string
+  additions: number
+  deletions: number
+  inserted_at: Date | string
+}

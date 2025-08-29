@@ -23,6 +23,12 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/github/pr/:prNumber/commits',
+      name: 'PrCommits',
+      component: () => import('@/views/PrCommitsView.vue'),
+      props: true,
+    },
+    {
       path: '/linkedin',
       name: 'LinkedIn',
       component: LinkedinView,
