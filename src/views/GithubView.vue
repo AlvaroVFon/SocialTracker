@@ -7,7 +7,7 @@
         class="hidden sm:block"
       />
       <div class="flex-1 min-w-0">
-        <SocialAccountCard v-if="account" v-bind="account as any" class="mb-4 sm:mb-8" />
+  <SocialAccountCard v-if="account" v-bind="account as any" class="mb-4 sm:mb-8" />
         <SocialPlatformHeader :platform="githubPlatform" class="mb-4 sm:mb-8 sm:hidden" />
         <div class="space-y-6">
           <div :id="'dashboard'">
@@ -31,6 +31,7 @@
               :page-size="pageSize"
               :total="totalRepos"
               @update:page="repoPage = $event"
+              @search="onRepoSearch"
             />
           </div>
         </div>
@@ -79,15 +80,24 @@ async function loadPullRequests() {
 
 watch(prPage, loadPullRequests, { immediate: true })
 const activeSection = ref('dashboard')
-const dashboardCards = computed(() => getGithubDashboardCards(totals.value ?? {}))
+const dashboardCards = computed(() => getGithubDashboardCards((totals.value ?? {}) as any))
 
 const repoPage = ref(1)
 const pageSize = 6
 const totalRepos = ref(0)
+const searchQuery = ref('')
 
 async function loadRepos() {
   const offset = (repoPage.value - 1) * pageSize
-  await fetchRepos(pageSize, offset)
+  await fetchRepos(pageSize, offset, {
+  query: searchQuery.value || undefined,
+  })
+}
+
+async function loadReposCount() {
+  totalRepos.value = await fetchReposCount({
+  query: searchQuery.value || undefined,
+  })
 }
 
 watch(repoPage, loadRepos, { immediate: true })
@@ -99,6 +109,19 @@ onMounted(async () => {
   totalRepos.value = await fetchReposCount()
   fetchTotals()
 })
+
+watch(searchQuery, async () => {
+  repoPage.value = 1
+  await loadReposCount()
+  await loadRepos()
+})
+
+function onRepoSearch(payload: { query: string }) {
+  searchQuery.value = payload.query || ''
+  repoPage.value = 1
+  loadReposCount()
+  loadRepos()
+}
 
 const githubMenu = useGithubMenu(activeSection)
 </script>

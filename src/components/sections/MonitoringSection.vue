@@ -1,6 +1,11 @@
 <template>
   <div class="rounded-lg bg-white p-3 sm:p-6 shadow">
-    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">{{ sectionTitle }}</h2>
+    <div class="flex items-center justify-between mb-4 sm:mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-900">{{ sectionTitle }}</h2>
+      <div class="w-56 sm:w-72 flex-shrink-0">
+        <SearchBar v-model="localQuery" placeholder="Buscar..." @search="onSearch" />
+      </div>
+    </div>
     <div class="space-y-3 sm:space-y-4">
       <div class="space-y-3 sm:space-y-4">
         <template v-if="type === 'activity'">
@@ -8,7 +13,7 @@
         </template>
         <template v-else-if="type === 'pullrequest'">
           <PullRequestCard
-            v-for="(item, index) in items"
+            v-for="(item, index) in filteredItems"
             :key="index"
             :pullRequest="item as PullRequest"
           />
@@ -39,6 +44,7 @@ import { ref, watch, computed } from 'vue'
 import PullRequestCard from '@/components/ui/PullRequestCard.vue'
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import ActivityCard from '@/components/ui/ActivityCard.vue'
+import SearchBar from '@/components/ui/SearchBar.vue'
 import type { PullRequest } from '@/types/repo'
 
 type MonitoringType = 'activity' | 'pullrequest' | 'post'
@@ -67,7 +73,7 @@ interface Props {
   total?: number
 }
 
-const emit = defineEmits<{ (e: 'update:page', value: number): void }>()
+const emit = defineEmits<{ (e: 'update:page', value: number): void; (e: 'search', payload: { query: string }): void }>()
 
 const props = defineProps<Props>()
 
@@ -77,7 +83,22 @@ const total = computed(() => props.total ?? 0)
 
 const showPagination = computed(() => total.value > pageSize.value)
 
+const localQuery = ref('')
+
+const filteredItems = computed(() => {
+  if ((props.type as MonitoringType) !== 'pullrequest' || !localQuery.value) return props.items as PullRequest[]
+  const q = localQuery.value.toLowerCase()
+  return (props.items as PullRequest[]).filter((p) =>
+    (p.author_name || '').toLowerCase().includes(q) || (p.title || '').toLowerCase().includes(q) || (p.repo_name || '').toLowerCase().includes(q),
+  )
+})
+
 function onPageChange(newPage: number) {
   emit('update:page', newPage)
+}
+
+function onSearch(payload: { query: string }) {
+  localQuery.value = payload.query || ''
+  emit('search', payload)
 }
 </script>
