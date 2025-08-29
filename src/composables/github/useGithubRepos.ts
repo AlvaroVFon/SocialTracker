@@ -6,18 +6,35 @@ import { getViewsData, getClonesData } from '@/composables/github/githubHelper'
 export function useGithubRepos() {
   const repos = ref<Repo[]>()
   const totals = ref<RepoTotals>()
-  const commits = ref<Commit[]>()
+  const commits = ref<Commit[] | null>(null)
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  const fetchRepos = async (limit = 10, offset = 0) => {
+  type RepoFilter = { query?: string; field?: string }
+
+  const fetchRepos = async (limit = 10, offset = 0, filter?: RepoFilter) => {
     loading.value = true
     error.value = null
-    const { data, error: fetchError } = await supabase
-      .from('repo_stats')
-      .select('*')
+    let qb: unknown = supabase.from('repo_stats').select('*')
+
+    if (filter && filter.query) {
+      const q = `%${filter.query}%`
+      if (filter.field) {
+        // @ts-expect-error - supabase query builder dynamic typing
+        qb = (qb as unknown as any).ilike(filter.field, q)
+      } else {
+        // @ts-expect-error - supabase query builder dynamic typing
+        qb = (qb as unknown as any).or(`name.ilike.${q},description.ilike.${q},language.ilike.${q}`)
+      }
+    }
+
+    // @ts-expect-error - supabase query builder dynamic typing
+    qb = (qb as unknown as any)
       .order('total_views', { ascending: false })
       .range(offset, offset + limit - 1)
+
+    // @ts-expect-error - qb is a supabase query builder
+    const { data, error: fetchError } = await (qb as unknown as any)
     if (fetchError) {
       error.value = fetchError.message
       repos.value = []
@@ -28,10 +45,21 @@ export function useGithubRepos() {
     return repos.value
   }
 
-  const fetchReposCount = async () => {
-    const { count, error: fetchError } = await supabase
-      .from('repo_stats')
-      .select('*', { count: 'exact', head: true })
+  const fetchReposCount = async (filter?: RepoFilter) => {
+    let qb: unknown = supabase.from('repo_stats').select('*', { count: 'exact', head: true })
+    if (filter && filter.query) {
+      const q = `%${filter.query}%`
+      if (filter.field) {
+        // @ts-expect-error - supabase query builder dynamic typing
+        qb = (qb as unknown as any).ilike(filter.field, q)
+      } else {
+        // @ts-expect-error - supabase query builder dynamic typing
+        qb = (qb as unknown as any).or(`name.ilike.${q},description.ilike.${q},language.ilike.${q}`)
+      }
+    }
+
+    // @ts-expect-error - qb is a supabase query builder
+    const { count, error: fetchError } = await (qb as unknown as any)
     if (fetchError) {
       error.value = fetchError.message
       return 0
