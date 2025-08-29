@@ -30,3 +30,16 @@ export interface RepoTotals {
   total_clones: number | string
   total_unique_clones: number | string
 }
+
+export interface PullRequest {
+  author_id: number
+  author_name: string
+  author_avatar_url: string
+  state: 'open' | 'closed' | 'merged'
+  title: string
+  created_at: Date | string
+  updated_at: Date | string
+  closed_at?: Date | string
+  repo_name: string
+  url: string
+}

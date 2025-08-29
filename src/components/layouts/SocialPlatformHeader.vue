@@ -17,7 +17,10 @@
           </p>
         </div>
       </div>
-      <nav v-if="sections && sections.length" class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0 w-full sm:w-auto">
+      <nav
+        v-if="sections && sections.length"
+        class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2 pb-1 min-w-0 w-full sm:w-auto"
+      >
         <button
           v-for="section in sections"
           :key="section.id"

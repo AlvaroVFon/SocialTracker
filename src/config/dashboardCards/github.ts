@@ -1,6 +1,11 @@
 import type { RepoTotals } from '@/types/repo'
 
-export function getGithubDashboardCards(totals: Partial<RepoTotals> = {}) {
+interface StatCardData extends RepoTotals {
+  title: string
+  iconName: string
+}
+
+export function getGithubDashboardCards(totals: StatCardData) {
   return [
     {
       title: 'Vistas Totales',
