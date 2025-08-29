@@ -1,5 +1,9 @@
 <template>
-  <div class="pr-card flex items-center gap-4 border border-gray-300 rounded-xl p-4 bg-white shadow-sm">
+  <div
+    class="pr-card flex items-center gap-4 border border-gray-300 rounded-xl p-4 bg-white shadow-sm relative"
+  >
+    <!-- Enlace a commits extraído a componente -->
+    <CommitLink :pr-number="pullRequest.pr_number" class="absolute top-2 right-2" />
     <img
       :src="pullRequest.author_avatar_url"
       alt="avatar"
@@ -49,6 +53,7 @@
 <script setup lang="ts">
 import LucideIcon from '@/components/icons/LucideIcon.vue'
 import type { PullRequest } from '@/types/repo'
+import CommitLink from './CommitLink.vue'
 
 defineProps<{ pullRequest: PullRequest }>()
 </script>

@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col items-center justify-center gap-2">
-    <div class="flex items-center justify-center gap-3 border border-gray-300 rounded-lg px-4 py-3 bg-white shadow-sm min-w-[160px]">
+    <div
+      class="flex items-center justify-center gap-3 border border-gray-300 rounded-lg px-4 py-3 bg-white shadow-sm min-w-[160px]"
+    >
       <LucideIcon :name="iconName" class="w-6 h-6 text-gray-400" />
       <div class="flex flex-col items-center">
         <span class="text-lg font-bold text-gray-900">{{ value || '0' }}</span>
@@ -25,5 +27,4 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   color: 'blue',
 })
-
 </script>

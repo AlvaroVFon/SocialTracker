@@ -8,7 +8,7 @@
         v-for="card in cards"
         :key="card.title"
         :title="card.title"
-        :icon-name="card.iconName"
+        :icon-name="card.iconName ?? ''"
         :value="`${card.value}`"
         :subtitle="card.subtitle ?? ''"
         :color="card.color as 'blue' | 'green' | 'purple' | 'red' | 'yellow' | undefined"
@@ -22,7 +22,7 @@ import StatCard from '@/components/ui/StatCard.vue'
 
 interface StatCardData {
   title: string
-  iconName: string
+  iconName?: string
   value: string | number
   subtitle?: string
   color?: string

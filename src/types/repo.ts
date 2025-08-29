@@ -32,6 +32,7 @@ export interface RepoTotals {
 }
 
 export interface PullRequest {
+  pr_number: number
   author_id: number
   author_name: string
   author_avatar_url: string
@@ -42,4 +43,5 @@ export interface PullRequest {
   closed_at?: Date | string
   repo_name: string
   url: string
+  commits_url?: string
 }

@@ -5,7 +5,7 @@ interface StatCardData extends RepoTotals {
   iconName: string
 }
 
-export function getGithubDashboardCards(totals: StatCardData) {
+export function getGithubDashboardCards(totals: StatCardData | RepoTotals) {
   return [
     {
       title: 'Vistas Totales',
