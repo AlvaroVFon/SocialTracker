@@ -20,20 +20,20 @@ export function useGithubRepos() {
     if (filter && filter.query) {
       const q = `%${filter.query}%`
       if (filter.field) {
-        // @ts-expect-error - supabase query builder dynamic typing
+        //eslint-disable-next-line
         qb = (qb as unknown as any).ilike(filter.field, q)
       } else {
-        // @ts-expect-error - supabase query builder dynamic typing
+        //eslint-disable-next-line
         qb = (qb as unknown as any).or(`name.ilike.${q},description.ilike.${q},language.ilike.${q}`)
       }
     }
 
-    // @ts-expect-error - supabase query builder dynamic typing
+    //eslint-disable-next-line
     qb = (qb as unknown as any)
       .order('total_views', { ascending: false })
       .range(offset, offset + limit - 1)
 
-    // @ts-expect-error - qb is a supabase query builder
+    //eslint-disable-next-line
     const { data, error: fetchError } = await (qb as unknown as any)
     if (fetchError) {
       error.value = fetchError.message
@@ -50,15 +50,15 @@ export function useGithubRepos() {
     if (filter && filter.query) {
       const q = `%${filter.query}%`
       if (filter.field) {
-        // @ts-expect-error - supabase query builder dynamic typing
+        //eslint-disable-next-line
         qb = (qb as unknown as any).ilike(filter.field, q)
       } else {
-        // @ts-expect-error - supabase query builder dynamic typing
+        //eslint-disable-next-line
         qb = (qb as unknown as any).or(`name.ilike.${q},description.ilike.${q},language.ilike.${q}`)
       }
     }
 
-    // @ts-expect-error - qb is a supabase query builder
+    //eslint-disable-next-line
     const { count, error: fetchError } = await (qb as unknown as any)
     if (fetchError) {
       error.value = fetchError.message

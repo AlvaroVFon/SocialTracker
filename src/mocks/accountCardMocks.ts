@@ -3,7 +3,7 @@ import type { AccountCardProps } from '@/components/ui/accountcard/AccountCardPr
 export const githubAccount: AccountCardProps = {
   username: 'octocat',
   name: 'The Octocat',
-  avatarUrl: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
   iconName: 'Github',
   iconColor: '#181717',
   bio: 'GitHub mascot and friendly helper.',
@@ -18,7 +18,7 @@ export const githubAccount: AccountCardProps = {
 export const linkedinAccount: AccountCardProps = {
   username: 'janedoe',
   name: 'Jane Doe',
-  avatarUrl: 'https://randomuser.me/api/portraits/women/44.jpg',
+  avatar_url: 'https://randomuser.me/api/portraits/women/44.jpg',
   iconName: 'Linkedin',
   iconColor: '#0A66C2',
   bio: 'Marketing Specialist at Acme Corp.',
@@ -31,7 +31,7 @@ export const linkedinAccount: AccountCardProps = {
 export const twitterAccount: AccountCardProps = {
   username: 'elonmusk',
   name: 'Elon Musk',
-  avatarUrl: 'https://pbs.twimg.com/profile_images/1590968738358079488/IY9Gx6Ok_400x400.jpg',
+  avatar_url: 'https://pbs.twimg.com/profile_images/1590968738358079488/IY9Gx6Ok_400x400.jpg',
   iconName: 'Twitter',
   iconColor: '#1DA1F2',
   bio: 'Mars, Cars, Chips, Starships. Tweets sometimes.',
@@ -44,7 +44,7 @@ export const twitterAccount: AccountCardProps = {
 export const instagramAccount: AccountCardProps = {
   username: 'natgeo',
   name: 'National Geographic',
-  avatarUrl:
+  avatar_url:
     'https://instagram.fmad3-4.fna.fbcdn.net/v/t51.2885-19/11820650_1625907977662747_180064660_a.jpg',
   iconName: 'Instagram',
   iconColor: '#C13584',
